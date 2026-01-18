@@ -2,535 +2,304 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Licencia LykaiOS - Media Space App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Licencia LykaiOS</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f2f2f7;
-            --bg-card: #ffffff;
-            --text-primary: #000000;
-            --text-secondary: #8e8e93;
-            --accent-blue: #007aff;
-            --accent-green: #34c759;
-            --border-color: #c7c7cc;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --bg: #ffffff;
+            --card: #ffffff;
+            --text: #000000;
+            --text2: #8e8e93;
+            --blue: #007aff;
+            --green: #34c759;
+            --border: #c7c7cc;
         }
-
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #000000;
-                --bg-secondary: #1c1c1e;
-                --bg-card: #1c1c1e;
-                --text-primary: #ffffff;
-                --text-secondary: #98989d;
-                --accent-blue: #0a84ff;
-                --accent-green: #30d158;
-                --border-color: #38383a;
-                --shadow-color: rgba(0, 0, 0, 0.3);
+                --bg: #000000;
+                --card: #1c1c1e;
+                --text: #ffffff;
+                --text2: #98989d;
+                --blue: #0a84ff;
+                --green: #30d158;
+                --border: #38383a;
             }
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
-
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.4;
-            padding: 0;
-            margin: 0;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
             display: flex;
             flex-direction: column;
-            padding-top: constant(safe-area-inset-top);
-            padding-top: env(safe-area-inset-top);
         }
-
-        /* Header estilo iOS */
-        .ios-header {
-            background-color: var(--bg-card);
-            padding: 16px;
-            border-bottom: 0.5px solid var(--border-color);
+        .header {
+            padding: 12px 16px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            padding-top: calc(16px + constant(safe-area-inset-top));
-            padding-top: calc(16px + env(safe-area-inset-top));
-        }
-
-        .header-title {
+            border-bottom: 0.5px solid var(--border);
             font-size: 17px;
             font-weight: 600;
+            flex-shrink: 0;
         }
-
-        /* Contenedor principal */
-        .container {
-            max-width: 100%;
-            padding: 16px;
-            flex-grow: 1;
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 12px;
         }
-
-        /* Tarjeta de licencia */
-        .license-card {
-            background-color: var(--bg-card);
-            border-radius: 14px;
+        .card {
+            background: var(--card);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 20px var(--shadow-color);
-            margin-bottom: 16px;
-            border: 0.5px solid var(--border-color);
+            border: 0.5px solid var(--border);
         }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--accent-blue), #5856d6);
+        .card-top {
+            background: linear-gradient(135deg, var(--blue), #5856d6);
             color: white;
-            padding: 20px 16px;
-            position: relative;
+            padding: 16px;
+            text-align: center;
         }
-
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 14px;
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: 12px;
+            font-size: 22px;
         }
-
-        .product-name {
-            font-size: 24px;
+        .name {
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
+            margin-bottom: 2px;
         }
-
-        .company-name {
-            font-size: 15px;
+        .company {
+            font-size: 13px;
             opacity: 0.9;
-            font-weight: 400;
         }
-
-        /* Estado de la licencia */
-        .license-status {
+        .status {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid var(--border);
             display: flex;
             align-items: center;
-            padding: 16px;
-            border-bottom: 0.5px solid var(--border-color);
         }
-
-        .status-badge {
-            background-color: rgba(52, 199, 89, 0.15);
-            color: var(--accent-green);
-            padding: 6px 12px;
+        .badge {
+            background: rgba(52,199,89,0.15);
+            color: var(--green);
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
         }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 6px;
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0%,100% { opacity:1; } 50% { opacity:0.5; }
         }
-
-        /* Información compacta */
-        .info-grid {
+        .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background-color: var(--border-color);
+            gap: 0.5px;
+            background: var(--border);
         }
-
-        .info-item {
-            background-color: var(--bg-card);
-            padding: 14px 16px;
+        .item {
+            background: var(--card);
+            padding: 10px 12px;
         }
-
-        .info-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 400;
+        .label {
+            font-size: 11px;
+            color: var(--text2);
+            margin-bottom: 2px;
         }
-
-        .info-value {
-            font-size: 16px;
+        .value {
+            font-size: 14px;
             font-weight: 500;
         }
-
-        /* Contador regresivo */
-        .countdown-section {
-            padding: 20px 16px;
-            border-top: 0.5px solid var(--border-color);
+        .countdown {
+            padding: 16px;
+            border-top: 0.5px solid var(--border);
         }
-
-        .countdown-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-        }
-
-        .countdown-title i {
-            margin-right: 8px;
-            color: var(--accent-blue);
-        }
-
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 8px;
         }
-
-        .countdown-unit {
+        .unit {
             text-align: center;
         }
-
-        .countdown-value {
-            font-size: 28px;
+        .number {
+            font-size: 24px;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--blue);
             font-variant-numeric: tabular-nums;
             line-height: 1;
-            margin-bottom: 4px;
         }
-
-        .countdown-label {
-            font-size: 12px;
-            color: var(--text-secondary);
+        .text {
+            font-size: 11px;
+            color: var(--text2);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
-        /* Notas y pie */
-        .license-notes {
-            padding: 16px;
-            border-top: 0.5px solid var(--border-color);
-            background-color: rgba(0, 122, 255, 0.05);
+        .notes {
+            padding: 12px 16px;
+            border-top: 0.5px solid var(--border);
+            background: rgba(0,122,255,0.05);
         }
-
         .notes-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--accent-blue);
-        }
-
-        .notes-text {
             font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.4;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--blue);
         }
-
-        .license-footer {
-            padding: 16px;
-            border-top: 0.5px solid var(--border-color);
+        .notes-desc {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.3;
+        }
+        .footer {
+            padding: 12px 16px;
+            border-top: 0.5px solid var(--border);
             display: flex;
             justify-content: space-between;
         }
-
         .footer-item {
             text-align: center;
             flex: 1;
         }
-
         .footer-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
+            font-size: 10px;
+            color: var(--text2);
         }
-
         .footer-value {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
-        }
-
-        /* Indicador de iOS */
-        .ios-indicator {
-            height: 5px;
-            background-color: var(--bg-card);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            margin: 0 auto;
-            width: 134px;
-            position: sticky;
-            top: 8px;
-            z-index: 11;
-            margin-top: 8px;
-        }
-
-        /* Ajustes para iPhone específicos */
-        @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: -webkit-fill-available;
-            }
-            
-            .container {
-                padding-bottom: calc(16px + constant(safe-area-inset-bottom));
-                padding-bottom: calc(16px + env(safe-area-inset-bottom));
-            }
-        }
-
-        /* Orientación horizontal */
-        @media (orientation: landscape) {
-            .container {
-                padding: 12px;
-            }
-            
-            .info-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* iPhone más pequeños */
-        @media (max-width: 350px) {
-            .countdown-value {
-                font-size: 24px;
-            }
-            
-            .product-name {
-                font-size: 22px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Indicador de iOS (similar a la barra de agarre) -->
-    <div class="ios-indicator"></div>
-    
-    <!-- Header estilo iOS -->
-    <div class="ios-header">
-        <div class="header-title">Licencia LykaiOS</div>
-    </div>
-    
-    <!-- Contenido principal -->
-    <div class="container">
-        <div class="license-card">
-            <!-- Encabezado de la tarjeta -->
-            <div class="card-header">
-                <div class="app-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div class="product-name">LykaiOS</div>
-                <div class="company-name">Media Space App</div>
+    <div class="header">Licencia LykaiOS</div>
+    <div class="content">
+        <div class="card">
+            <div class="card-top">
+                <div class="icon">🚀</div>
+                <div class="name">LykaiOS</div>
+                <div class="company">Media Space App</div>
             </div>
-            
-            <!-- Estado de la licencia -->
-            <div class="license-status">
-                <div class="status-badge">
-                    <div class="status-dot"></div>
-                    Licencia Activa
-                </div>
+            <div class="status">
+                <div class="badge"><span class="dot"></span>Activa</div>
             </div>
-            
-            <!-- Información de la licencia -->
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">ID de Licencia</div>
-                    <div class="info-value">LYK-ENT-7B29</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Propietario</div>
-                    <div class="info-value">JEXE</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Activación</div>
-                    <div class="info-value">15/01/2025</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Tipo</div>
-                    <div class="info-value">Enterprise</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Versión</div>
-                    <div class="info-value">v3.5.2</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Plataforma</div>
-                    <div class="info-value">iOS</div>
-                </div>
+            <div class="grid">
+                <div class="item"><div class="label">ID</div><div class="value">LYK-ENT-7B29</div></div>
+                <div class="item"><div class="label">Propietario</div><div class="value">JEXE</div></div>
+                <div class="item"><div class="label">Activación</div><div class="value">15/01/2025</div></div>
+                <div class="item"><div class="label">Tipo</div><div class="value">Enterprise</div></div>
+                <div class="item"><div class="label">Versión</div><div class="value">v3.5.2</div></div>
+                <div class="item"><div class="label">Plataforma</div><div class="value">iOS</div></div>
             </div>
-            
-            <!-- Contador regresivo -->
-            <div class="countdown-section">
-                <div class="countdown-title">
-                    <i class="far fa-clock"></i>
-                    
-                </div>
+            <div class="countdown">
                 <div class="countdown-grid">
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="days">000</div>
-                        <div class="countdown-label">Días</div>
-                    </div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="hours">00</div>
-                        <div class="countdown-label">Horas</div>
-                    </div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="minutes">00</div>
-                        <div class="countdown-label">Minutos</div>
-                    </div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="seconds">00</div>
-                        <div class="countdown-label">Segundos</div>
-                    </div>
+                    <div class="unit"><div class="number" id="days">000</div><div class="text">Días</div></div>
+                    <div class="unit"><div class="number" id="hours">00</div><div class="text">Horas</div></div>
+                    <div class="unit"><div class="number" id="minutes">00</div><div class="text">Minutos</div></div>
+                    <div class="unit"><div class="number" id="seconds">00</div><div class="text">Segundos</div></div>
                 </div>
             </div>
-            
-            <!-- Notas de la licencia -->
-            <div class="license-notes">
-                <div class="notes-title">Información de la Licencia</div>
-                <div class="notes-text">
-                    Esta licencia Enterprise de LykaiOS es válida hasta la fecha de vencimiento. Incluye actualizaciones, soporte prioritario y acceso a todas las funciones premium.
-                </div>
+            <div class="notes">
+                <div class="notes-title">Información</div>
+                <div class="notes-desc">Licencia Enterprise válida hasta el vencimiento. Incluye actualizaciones y soporte premium.</div>
             </div>
-            
-            <!-- Pie de la licencia -->
-            <div class="license-footer">
-                <div class="footer-item">
-                    <div class="footer-label">Creador</div>
-                    <div class="footer-value">JEXE</div>
-                </div>
-                <div class="footer-item">
-                    <div class="footer-label">Documento</div>
-                    <div class="footer-value">00752</div>
-                </div>
-                <div class="footer-item">
-                    <div class="footer-label">Verificación</div>
-                    <div class="footer-value" id="current-date">Hoy</div>
-                </div>
+            <div class="footer">
+                <div class="footer-item"><div class="footer-label">Creador</div><div class="footer-value">JEXE</div></div>
+                <div class="footer-item"><div class="footer-label">Documento</div><div class="footer-value">00752</div></div>
+                <div class="footer-item"><div class="footer-label">Verificación</div><div class="footer-value" id="date">Hoy</div></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Fecha de vencimiento: 31 de diciembre de 2026
-        const expirationDate = new Date('December 31, 2026 23:59:59').getTime();
+        // Bloquear zoom y gestos no deseados
+        document.addEventListener('gesturestart', e => e.preventDefault());
+        document.addEventListener('touchmove', e => { if(e.scale !== 1) e.preventDefault(); }, {passive: false});
         
-        // Formatear fecha para iOS
-        const formatDate = (date) => {
-            return date.toLocaleDateString('es-ES', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-            });
-        };
-        
-        // Actualizar contador cada segundo
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = expirationDate - now;
+        // Contador hasta 31/12/2026
+        const end = new Date('2026-12-31T23:59:59').getTime();
+        const update = () => {
+            const now = Date.now();
+            const diff = end - now;
             
-            if (distance < 0) {
-                // Licencia expirada
-                document.getElementById("days").textContent = "000";
-                document.getElementById("hours").textContent = "00";
-                document.getElementById("minutes").textContent = "00";
-                document.getElementById("seconds").textContent = "00";
-                
-                const statusBadge = document.querySelector('.status-badge');
-                statusBadge.innerHTML = '<div class="status-dot" style="background-color:#ff3b30;"></div> Expirada';
-                statusBadge.style.backgroundColor = 'rgba(255, 59, 48, 0.15)';
-                statusBadge.style.color = '#ff3b30';
-                
+            if(diff < 0) {
+                document.getElementById('days').textContent = '000';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.badge').innerHTML = '<span class="dot" style="background:#ff3b30"></span>Expirada';
+                document.querySelector('.badge').style.background = 'rgba(255,59,48,0.15)';
+                document.querySelector('.badge').style.color = '#ff3b30';
                 return;
             }
             
-            // Calcular tiempo restante
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(diff / 86400000);
+            const hours = Math.floor((diff % 86400000) / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
             
-            // Actualizar display
-            document.getElementById("days").textContent = days.toString().padStart(3, '0');
-            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            document.getElementById('days').textContent = days.toString().padStart(3,'0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2,'0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2,'0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2,'0');
         };
         
-        // Actualizar fecha de verificación
-        const updateVerificationDate = () => {
-            const now = new Date();
-            const currentDateElement = document.getElementById('current-date');
-            
-            // Mostrar "Hoy", "Ayer" o la fecha
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-            
-            if (now >= today && now < today.getTime() + 86400000) {
-                currentDateElement.textContent = "Hoy";
-            } else if (now >= yesterday && now < yesterday.getTime() + 86400000) {
-                currentDateElement.textContent = "Ayer";
-            } else {
-                currentDateElement.textContent = formatDate(now);
+        // Fecha de verificación
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const dateEl = document.getElementById('date');
+        
+        if(today.toDateString() === new Date().toDateString()) {
+            dateEl.textContent = 'Hoy';
+        } else if(yesterday.toDateString() === new Date().toDateString()) {
+            dateEl.textContent = 'Ayer';
+        } else {
+            dateEl.textContent = today.toLocaleDateString('es-ES', {day:'numeric', month:'short'});
+        }
+        
+        // Iniciar y actualizar cada segundo
+        update();
+        setInterval(update, 1000);
+        
+        // Prevenir scroll fuera de contenido
+        document.body.addEventListener('touchmove', e => {
+            if(e.target === document.body || e.target === document.documentElement) {
+                e.preventDefault();
             }
-        };
-        
-        // Efecto táctil para botones
-        document.addEventListener('touchstart', function() {}, {passive: true});
-        
-        // Inicializar
-        updateCountdown();
-        updateVerificationDate();
-        
-        // Actualizar cada segundo
-        setInterval(updateCountdown, 1000);
-        
-        // Actualizar fecha cada minuto
-        setInterval(updateVerificationDate, 60000);
-        
-        // Efecto de toque en la tarjeta
-        const licenseCard = document.querySelector('.license-card');
-        let isTouching = false;
-        
-        licenseCard.addEventListener('touchstart', function() {
-            if (!isTouching) {
-                this.style.transform = 'scale(0.99)';
-                this.style.transition = 'transform 0.1s ease';
-                isTouching = true;
-            }
-        });
-        
-        licenseCard.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-            this.style.transition = 'transform 0.2s ease';
-            isTouching = false;
-        });
-        
-        licenseCard.addEventListener('touchcancel', function() {
-            this.style.transform = 'scale(1)';
-            this.style.transition = 'transform 0.2s ease';
-            isTouching = false;
-        });
+        }, {passive: false});
     </script>
 </body>
 </html>
